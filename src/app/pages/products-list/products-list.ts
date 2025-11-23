@@ -19,8 +19,9 @@ export class ProductsList implements OnInit {
   products = signal<Product[]>([]);
   productService = inject(ProductService);
 
-  async ngOnInit() {
-    const productData = await this.productService.getProducts();
-    this.products.set(productData)
+  ngOnInit() {
+    this.productService.getProducts().subscribe((products) => {
+      this.products.set(products)
+    })
   }
 }
